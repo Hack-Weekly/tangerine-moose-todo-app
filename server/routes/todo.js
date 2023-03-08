@@ -2,13 +2,17 @@ const express = require('express');
 const db = require('../db/connect.js');
 
 const router = express.Router();
+// Client access: NOTE - if you want to interact with the database,
+// you first need to get a reference to the collection (think of a table in SQL).
+// To do this, you have to await the return of calling client.db().collection('todos') and then you can do what you need off the
+// collection - see the example below in the POST request handler.
 const client = db.getClient();
 
 // Create a route so that when a POST request is made, it stores the request body in the database under a collection called "todo".
 router.post('/todo', async (req, res, next) => {
   console.log(req.body);
   // Get access to the collection (basically the same concept as a table in the SQL world).
-  let collection = await client.db().collection('todo');
+  let collection = await client.db().collection('todos');
 
   // TODO: VALIDATE INCOMING REQUEST
 
