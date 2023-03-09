@@ -16,13 +16,12 @@ exports.todo_post = [
     .escape(),
 
   async (req, res, next) => {
-    // console.log(req.body);
     // find errors from validation
-
     try {
       const result = validationResult(req);
       if (!result.isEmpty()) {
         console.log(result.errors);
+        // if there are any errors, send them back to the client to display to the user.
         res.send(result.errors).status(400);
       } else {
         // Get access to the collection (basically the same concept as a table in the SQL world).
@@ -34,6 +33,7 @@ exports.todo_post = [
       }
     } catch (error) {
       console.log(error);
+      // If there's a server error, send it back to the client.
       res.send(error).status(500);
     }
   },
@@ -49,6 +49,7 @@ exports.todo_get = async (req, res, next) => {
     res.send(results).status(200);
   } catch (error) {
     console.log(error);
+    // send back server errors to the client
     res.send(error).status(500);
   }
 };
