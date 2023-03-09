@@ -29,3 +29,12 @@ exports.todo_post = [
     res.send(result).status(204);
   },
 ];
+
+// get todo's from db
+exports.todo_get = async (req, res, next) => {
+  let collection = await client.db().collection("todos");
+  let results = await collection.find({}).toArray();
+
+  // results contains array of todo items from todos collection
+  res.send(results).status(200);
+};

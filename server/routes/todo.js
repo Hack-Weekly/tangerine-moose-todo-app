@@ -12,10 +12,12 @@ const router = express.Router();
 router.post("/", todoController.todo_post);
 
 // Create a route that will return all of the items within a collection.
-router.get("/todo", async (req, res, next) => {
-  // TODO: IMPLEMENT THE REAL ROUTE HANDLER
-  console.log(db);
-  res.send("Hello!");
-});
+router.get("/", todoController.todo_get);
+
+// async (req, res, next) => {
+//   // TODO: IMPLEMENT THE REAL ROUTE HANDLER
+//   console.log(db);
+//   res.send("Hello!");
+// });
 
 module.exports = router;
