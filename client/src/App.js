@@ -9,8 +9,9 @@ function App() {
         <h1>Simple to-do app</h1>
       </div>
       <div id="add-item-form">
-        <form method="POST">
-          <input type="text" id="todo-item"></input>
+        <form action="" method="POST">
+          <label htmlFor="item"></label>
+          <input type="text" id="item" name="item"></input>
           <button type="submit" id="submit-btn">
             + Add
           </button>
