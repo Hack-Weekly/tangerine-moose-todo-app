@@ -1,29 +1,35 @@
-import { useState } from "react";
-import classes from "./TodoForm.module.css";
+import { useState } from 'react';
+import classes from './TodoForm.module.css';
 
 const TodoForm = () => {
-  const [itemText, setItemText] = useState("");
-  const [error, setError] = useState("");
+  const [itemText, setItemText] = useState('');
+  const [error, setError] = useState('');
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(itemText);
     const body = {
       item: itemText,
     };
     try {
-      const call = await fetch("http://localhost:4000/todo", {
-        method: "POST",
+      const call = await fetch('http://localhost:4000/todo', {
+        method: 'POST',
         body: JSON.stringify(body),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
+      if (!call.ok) {
+        const response = await call.json();
+        console.log(response.errors);
+        setError(response.errors);
+      } else {
+        const response = await call.json();
 
-      const response = await call.json();
-      if (!response.status === 204) {
-        console.log("Something went wrong...");
+        console.log(response);
       }
+      // if (!response.status === 204) {
+      //   console.log('Something went wrong...');
+      // }
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -37,7 +43,7 @@ const TodoForm = () => {
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.formControl}>
-        <label htmlFor="item">Todo Item</label>
+        <label htmlFor="item">Add Todo Item</label>
         <input
           type="text"
           id="item"
@@ -51,7 +57,11 @@ const TodoForm = () => {
           + Add
         </button>
       </div>
-      {error && <p>Something went wrong: {error.message}</p>}
+      {error && (
+        <p className={classes.error}>
+          Something went wrong: {error.map((e) => e.msg)}
+        </p>
+      )}
     </form>
   );
 };
