@@ -1,10 +1,9 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h2>This is Matt's addition for a test commit!</h2>
       <div id="title">
         <h1>Simple to-do app</h1>
       </div>
