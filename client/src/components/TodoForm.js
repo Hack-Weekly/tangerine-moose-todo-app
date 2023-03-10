@@ -1,28 +1,29 @@
-import { useState } from "react";
-import classes from "./TodoForm.module.css";
+import { useState } from 'react';
+import classes from './TodoForm.module.css';
 
 const TodoForm = () => {
-  const [itemText, setItemText] = useState("");
-  const [error, setError] = useState("");
+  const [itemText, setItemText] = useState('');
+  const [error, setError] = useState('');
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(itemText);
+    // console.log(itemText);
+
     const body = {
       item: itemText,
     };
     try {
-      const call = await fetch("http://localhost:4000/todo", {
-        method: "POST",
+      const call = await fetch('http://localhost:4000/todo', {
+        method: 'POST',
         body: JSON.stringify(body),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
       const response = await call.json();
       if (!response.status === 204) {
-        console.log("Something went wrong...");
+        console.log('Something went wrong...');
       }
     } catch (error) {
       console.log(error);
