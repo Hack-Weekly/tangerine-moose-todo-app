@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const db = require('./db/connect.js');
+const cors = require('cors');
 
 const todoRoutes = require('./routes/todo.js');
 
@@ -11,6 +12,7 @@ const app = express();
 // converted to JSON.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // This is a reference to the route handlers that I created in a different file - only made the separation to keep this file slim.
 app.use(todoRoutes);
