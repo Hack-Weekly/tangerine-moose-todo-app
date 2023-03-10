@@ -3,10 +3,14 @@ import classes from './TodoForm.module.css';
 
 const TodoForm = () => {
   const [itemText, setItemText] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (itemText === '') {
+      setError([{ msg: 'You need to add an item.' }]);
+      return;
+    }
     const body = {
       item: itemText,
     };
@@ -20,7 +24,7 @@ const TodoForm = () => {
       });
       if (!call.ok) {
         const response = await call.json();
-        console.log(response.errors);
+        // console.log(response.errors);
         setError(response.errors);
       } else {
         const response = await call.json();
@@ -31,7 +35,7 @@ const TodoForm = () => {
       //   console.log('Something went wrong...');
       // }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setError(error.message);
     }
   };

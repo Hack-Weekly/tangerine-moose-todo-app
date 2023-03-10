@@ -22,7 +22,7 @@ exports.todo_post = [
       if (!result.isEmpty()) {
         console.log(result.array());
         // if there are any errors, send them back to the client to display to the user.
-        res.status(400).json({ errors: result.array() });
+        res.status(422).json({ errors: result.array() });
       } else {
         // Get access to the collection (basically the same concept as a table in the SQL world).
         let collection = await client.db().collection('todos');
