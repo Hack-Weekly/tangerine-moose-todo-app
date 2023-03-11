@@ -77,3 +77,8 @@ exports.todo_complete = async (req, res, next) => {
     res.send(err).status(500);
   }
 };
+
+exports.todo_delete = async (req, res, next) => {
+  // pass req.params.id to mongodb findOneAndDelete to delete the item
+  console.log(req.params.id);
+};
