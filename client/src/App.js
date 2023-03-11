@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <div className="add-item-form">
         <TodoForm />
       </div>
-      <div>{/* add to-do item component here? */}</div>
+      <div>
+        <TodoList />
+      </div>
     </div>
   );
 }
