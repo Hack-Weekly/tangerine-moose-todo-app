@@ -24,7 +24,10 @@ function App() {
 
   const todoCompletedHandler = (todo) => {
     // update the state of the todo
-    console.log(todo);
+    const indexToUpdate = todos.findIndex((t) => t._id === todo._id);
+    const newArr = [...todos];
+    newArr[indexToUpdate].completed = true;
+    setTodos(newArr);
   };
 
   return (
