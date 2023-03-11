@@ -55,6 +55,8 @@ exports.todo_get = async (req, res, next) => {
 };
 
 exports.todo_complete = async (req, res, next) => {
+  // use req.params.id to find the record in the database
+  // updated JUST the completed property on that record
   console.log('mark todo as complete here');
   console.log(req.body);
 };

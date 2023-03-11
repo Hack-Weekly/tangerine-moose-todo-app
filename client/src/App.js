@@ -22,6 +22,11 @@ function App() {
     console.log(todo);
   };
 
+  const todoCompletedHandler = (todo) => {
+    // update the state of the todo
+    console.log(todo);
+  };
+
   return (
     <div className="App">
       <div id="title">
@@ -34,7 +39,7 @@ function App() {
         <h1 id="list-title">My to-do list:</h1>
       </div>
       <div>
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onTodoCompleted={todoCompletedHandler} />
       </div>
     </div>
   );
