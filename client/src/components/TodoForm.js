@@ -22,20 +22,13 @@ const TodoForm = () => {
           'Content-Type': 'application/json',
         },
       });
+      const response = await call.json();
       if (!call.ok) {
-        const response = await call.json();
-        // console.log(response.errors);
         setError(response.errors);
       } else {
-        const response = await call.json();
-
         console.log(response);
       }
-      // if (!response.status === 204) {
-      //   console.log('Something went wrong...');
-      // }
     } catch (error) {
-      // console.log(error);
       setError(error.message);
     }
   };
