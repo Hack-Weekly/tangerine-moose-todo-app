@@ -3,12 +3,14 @@ import classes from './TodoForm.module.css';
 
 const TodoForm = () => {
   const [itemText, setItemText] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // console.log(itemText);
-
+    if (itemText === '') {
+      setError([{ msg: 'You need to add an item.' }]);
+      return;
+    }
     const body = {
       item: itemText,
     };
@@ -20,13 +22,13 @@ const TodoForm = () => {
           'Content-Type': 'application/json',
         },
       });
-
       const response = await call.json();
-      if (!response.status === 204) {
-        console.log('Something went wrong...');
+      if (!call.ok) {
+        setError(response.errors);
+      } else {
+        console.log(response);
       }
     } catch (error) {
-      console.log(error);
       setError(error.message);
     }
   };
@@ -38,7 +40,7 @@ const TodoForm = () => {
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.formControl}>
-        <label htmlFor="item">Todo Item</label>
+        <label htmlFor="item">Add Todo Item</label>
         <input
           type="text"
           id="item"
@@ -52,7 +54,11 @@ const TodoForm = () => {
           + Add
         </button>
       </div>
-      {error && <p>Something went wrong: {error.message}</p>}
+      {error && (
+        <p className={classes.error}>
+          Something went wrong: {error.map((e) => e.msg)}
+        </p>
+      )}
     </form>
   );
 };
