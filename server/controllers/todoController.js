@@ -20,9 +20,9 @@ exports.todo_post = [
 
       console.log(req.body);
       if (!result.isEmpty()) {
-        console.log(result.errors);
+        console.log(result.array());
         // if there are any errors, send them back to the client to display to the user.
-        res.send(result.errors).status(400);
+        res.status(422).json({ errors: result.array() });
       } else {
         // Get access to the collection (basically the same concept as a table in the SQL world).
         let collection = await client.db().collection('todos');

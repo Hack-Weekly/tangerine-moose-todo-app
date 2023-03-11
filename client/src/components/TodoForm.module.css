@@ -40,3 +40,8 @@
   justify-self: center;
   color: white;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}
