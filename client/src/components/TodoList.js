@@ -5,7 +5,7 @@ const TodoList = ({ todos, onTodoCompleted }) => {
     <ul>
       {todos.map((todo) => {
         return (
-          <Todo key={todo._id} todo={todo} onTodoComplete={onTodoCompleted} />
+          <Todo key={todo._id} todo={todo} onTodoCompleted={onTodoCompleted} />
         );
       })}
     </ul>
