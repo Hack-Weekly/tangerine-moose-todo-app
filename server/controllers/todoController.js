@@ -1,5 +1,5 @@
-const { body, validationResult } = require("express-validator");
-const db = require("../db/connect.js");
+const { body, validationResult } = require('express-validator');
+const db = require('../db/connect.js');
 
 // Client access: NOTE - if you want to interact with the database,
 // you first need to get a reference to the collection (think of a table in SQL).
@@ -10,13 +10,13 @@ const client = db.getClient();
 // post todo's to db
 exports.todo_post = [
   // validate & sanatize data
-  body("item", "You you need to add an item").isLength({ min: 1 }).trim(),
+  body('item', 'You you need to add an item').isLength({ min: 1 }).trim(),
   async (req, res, next) => {
     // find errors from validation
     try {
       const result = validationResult(req);
       // add date to post
-      req.body.date = new Date();
+      // req.body.date = new Date();
 
       console.log(req.body);
       if (!result.isEmpty()) {
@@ -25,7 +25,7 @@ exports.todo_post = [
         res.status(422).json({ errors: result.array() });
       } else {
         // Get access to the collection (basically the same concept as a table in the SQL world).
-        let collection = await client.db().collection("todos");
+        let collection = await client.db().collection('todos');
         // Wait to get a result back from inserting the request body content into the collection.
         let response = await collection.insertOne(req.body);
         // Send a response back to the client letting them know that the new entry was added to the db (this should be updated).
@@ -42,7 +42,7 @@ exports.todo_post = [
 // get todo's from db
 exports.todo_get = async (req, res, next) => {
   try {
-    let collection = await client.db().collection("todos");
+    let collection = await client.db().collection('todos');
     let results = await collection.find({}).toArray();
 
     // results contains array of todo items from todos collection
@@ -55,6 +55,6 @@ exports.todo_get = async (req, res, next) => {
 };
 
 exports.todo_complete = async (req, res, next) => {
-  console.log("mark todo as complete here");
+  console.log('mark todo as complete here');
   console.log(req.body);
 };
