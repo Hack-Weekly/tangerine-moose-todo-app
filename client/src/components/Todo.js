@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Todo = ({ todo, onTodoCompleted }) => {
   const date = new Date(todo.createdDate).toLocaleString();
@@ -6,22 +6,18 @@ const Todo = ({ todo, onTodoCompleted }) => {
   // TODO add todo item completed state
   const markItemComplete = async () => {
     // e.preventDefault();
-    console.log(todo._id);
 
-    const data = {
-      complete: 'complete',
-    };
     try {
       const call = await fetch(`http://localhost:4000/todo/${todo._id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data),
+        method: "PUT",
+        body: JSON.stringify({ item_name: todo.item }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const response = await call.json();
       if (!response.status === 204) {
-        console.log('Something broke when marking a todo item as complete');
+        console.log("Something broke when marking a todo item as complete");
       }
       onTodoCompleted(todo);
     } catch (error) {
