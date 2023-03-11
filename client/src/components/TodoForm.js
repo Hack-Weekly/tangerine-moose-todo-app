@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classes from './TodoForm.module.css';
 
-const TodoForm = () => {
+const TodoForm = ({ onAddTodo }) => {
   const [itemText, setItemText] = useState('');
   const [error, setError] = useState();
 
@@ -13,6 +13,8 @@ const TodoForm = () => {
     }
     const body = {
       item: itemText,
+      createdDate: new Date().toISOString(),
+      completed: false,
     };
     try {
       const call = await fetch('http://localhost:4000/todo', {
@@ -26,6 +28,7 @@ const TodoForm = () => {
       if (!call.ok) {
         setError(response.errors);
       } else {
+        onAddTodo({ ...body, _id: response.insertedId });
         console.log(response);
       }
     } catch (error) {
