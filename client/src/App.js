@@ -13,7 +13,8 @@ function App() {
       const data = await response.json();
       setTodos(data);
     })();
-  }, []);
+    // added 'todos' to rerender page when todo's is update (eg. when marked as complete and deleted)
+  }, [todos]);
 
   const addTodoHandler = (todo) => {
     setTodos((prevState) => {
@@ -28,10 +29,7 @@ function App() {
     const newArr = [...todos];
     newArr[indexToUpdate].completed = true;
     setTodos(newArr);
-  };
-
-  const todoDeleteHandler = (todo) => {
-    // update the state of the todo
+    console.log(todo);
   };
 
   return (
@@ -46,11 +44,7 @@ function App() {
         <h1 id="list-title">My to-do list:</h1>
       </div>
       <div>
-        <TodoList
-          todos={todos}
-          onTodoCompleted={todoCompletedHandler}
-          todoDeleteHandler={todoDeleteHandler}
-        />
+        <TodoList todos={todos} onTodoCompleted={todoCompletedHandler} />
       </div>
     </div>
   );

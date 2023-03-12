@@ -1,16 +1,11 @@
 import Todo from "./Todo.js";
 
-const TodoList = ({ todos, onTodoCompleted, todoDeleteHandler }) => {
+const TodoList = ({ todos, onTodoCompleted }) => {
   return (
     <ul>
       {todos.map((todo) => {
         return (
-          <Todo
-            key={todo._id}
-            todo={todo}
-            onTodoCompleted={onTodoCompleted}
-            todoDeleteHandler={todoDeleteHandler}
-          />
+          <Todo key={todo._id} todo={todo} onTodoCompleted={onTodoCompleted} />
         );
       })}
     </ul>

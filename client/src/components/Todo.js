@@ -1,6 +1,6 @@
 import React from "react";
 
-const Todo = ({ todo, onTodoCompleted, todoDeleteHandler }) => {
+const Todo = ({ todo, onTodoCompleted, onTodoDeleteHandler }) => {
   const date = new Date(todo.createdDate).toLocaleString();
 
   // TODO add todo item completed state
@@ -37,7 +37,6 @@ const Todo = ({ todo, onTodoCompleted, todoDeleteHandler }) => {
       if (!response.status === 204) {
         console.log("Something broke when marking a todo item as complete");
       }
-      todoDeleteHandler(todo);
     } catch (error) {
       console.log(error);
     }
