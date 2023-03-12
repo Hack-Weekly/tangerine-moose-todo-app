@@ -80,5 +80,5 @@ exports.todo_complete = async (req, res, next) => {
 
 exports.todo_delete = async (req, res, next) => {
   // pass req.params.id to mongodb findOneAndDelete to delete the item
-  console.log(req.params.id);
+  console.log(`ID ${req.params.id}`);
 };

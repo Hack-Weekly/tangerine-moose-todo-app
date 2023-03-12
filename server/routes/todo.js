@@ -10,9 +10,9 @@ router.post("/todo", todoController.todo_post);
 router.get("/todo", todoController.todo_get);
 
 // Create a route to mark item as complete (we could also use this if we wanted to mark the item as not complete)
-router.put("/todo/update/:id", todoController.todo_complete);
+router.put("/todo/:id", todoController.todo_complete);
 
 // Delete todo item
-router.post("/todo/delete/:id", todoController.todo_delete);
+router.delete("/todo/:id", todoController.todo_delete);
 
 module.exports = router;
