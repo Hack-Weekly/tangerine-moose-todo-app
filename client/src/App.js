@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('http://localhost:4000/todo');
+      const response = await fetch("http://localhost:4000/todo");
       const data = await response.json();
       setTodos(data);
     })();
-  }, []);
+    // added 'todos' to rerender page when todo's is update (eg. when marked as complete and deleted)
+  }, [todos]);
 
   const addTodoHandler = (todo) => {
     setTodos((prevState) => {
@@ -28,6 +29,7 @@ function App() {
     const newArr = [...todos];
     newArr[indexToUpdate].completed = true;
     setTodos(newArr);
+    console.log(todo);
   };
 
   return (

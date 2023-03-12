@@ -12,4 +12,7 @@ router.get("/todo", todoController.todo_get);
 // Create a route to mark item as complete (we could also use this if we wanted to mark the item as not complete)
 router.put("/todo/:id", todoController.todo_complete);
 
+// Delete todo item
+router.delete("/todo/:id", todoController.todo_delete);
+
 module.exports = router;
