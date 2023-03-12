@@ -1,11 +1,7 @@
 import React from 'react';
+import baseUrl from '../utils/baseUrl';
 
 const Todo = ({ todo, onTodoCompleted, onTodoDeleteHandler }) => {
-  const baseUrl =
-    process.env.NODE_ENV === 'development'
-      ? process.env.REACT_APP_DEV_BASE_URL
-      : process.env.REACT_APP_PROD_BASE_URL;
-
   const date = new Date(todo.createdDate).toLocaleString();
 
   // TODO add todo item completed state

@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
+import baseUrl from './utils/baseUrl';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
 function App() {
   const [todos, setTodos] = useState([]);
-
-  const baseUrl =
-    process.env.NODE_ENV === 'development'
-      ? process.env.REACT_APP_DEV_BASE_URL
-      : process.env.REACT_APP_PROD_BASE_URL;
 
   useEffect(() => {
     (async () => {
@@ -19,7 +15,7 @@ function App() {
       setTodos(data);
     })();
     // added 'todos' to rerender page when todo's is update (eg. when marked as complete and deleted)
-  }, [todos, baseUrl]);
+  }, [todos]);
 
   const addTodoHandler = (todo) => {
     setTodos((prevState) => {

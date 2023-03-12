@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classes from './TodoForm.module.css';
+import baseUrl from '../utils/baseUrl';
 
 const TodoForm = ({ onAddTodo }) => {
   const [itemText, setItemText] = useState('');
@@ -17,7 +18,7 @@ const TodoForm = ({ onAddTodo }) => {
       completed: false,
     };
     try {
-      const call = await fetch('http://localhost:4000/todo', {
+      const call = await fetch(baseUrl, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
