@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Todo = ({ todo, onTodoCompleted, onTodoDeleteHandler }) => {
+  const baseUrl =
+    process.env.NODE_ENV === 'development'
+      ? process.env.REACT_APP_DEV_BASE_URL
+      : process.env.REACT_APP_PROD_BASE_URL;
+
   const date = new Date(todo.createdDate).toLocaleString();
 
   // TODO add todo item completed state
@@ -8,7 +13,7 @@ const Todo = ({ todo, onTodoCompleted, onTodoDeleteHandler }) => {
     // e.preventDefault();
     onTodoCompleted(todo);
     try {
-      const call = await fetch(`http://localhost:4000/todo/${todo._id}`, {
+      const call = await fetch(`${baseUrl}/${todo._id}`, {
         method: 'PUT',
         body: JSON.stringify({ item_name: todo.item }),
         headers: {
@@ -26,15 +31,15 @@ const Todo = ({ todo, onTodoCompleted, onTodoDeleteHandler }) => {
 
   const deleteItem = async () => {
     try {
-      const call = await fetch(`http://localhost:4000/todo/${todo._id}`, {
-        method: "DELETE",
+      const call = await fetch(`${baseUrl}/${todo._id}`, {
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const response = await call.json();
       if (!response.status === 204) {
-        console.log("Something broke when marking a todo item as complete");
+        console.log('Something broke when marking a todo item as complete');
       }
     } catch (error) {
       console.log(error);

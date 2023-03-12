@@ -1,20 +1,25 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import { useState, useEffect } from 'react';
+import './App.css';
 
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
   const [todos, setTodos] = useState([]);
 
+  const baseUrl =
+    process.env.NODE_ENV === 'development'
+      ? process.env.REACT_APP_DEV_BASE_URL
+      : process.env.REACT_APP_PROD_BASE_URL;
+
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:4000/todo");
+      const response = await fetch(baseUrl);
       const data = await response.json();
       setTodos(data);
     })();
     // added 'todos' to rerender page when todo's is update (eg. when marked as complete and deleted)
-  }, [todos]);
+  }, [todos, baseUrl]);
 
   const addTodoHandler = (todo) => {
     setTodos((prevState) => {
