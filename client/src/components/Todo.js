@@ -24,6 +24,25 @@ const Todo = ({ todo, onTodoCompleted }) => {
       console.log(error);
     }
   };
+
+  const deleteItem = async () => {
+    try {
+      const call = await fetch(`http://localhost:4000/todo/${todo._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await call.json();
+      if (!response.status === 204) {
+        console.log("Something broke when marking a todo item as complete");
+      }
+      onTodoCompleted(todo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -36,6 +55,11 @@ const Todo = ({ todo, onTodoCompleted }) => {
       <div>
         <button id="itemCompletedBtn" onClick={markItemComplete}>
           Complete
+        </button>
+      </div>
+      <div>
+        <button id="itemDeleteBtn" onClick={deleteItem}>
+          Delete
         </button>
       </div>
     </div>
