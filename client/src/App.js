@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('http://localhost:4000/todo');
+      const response = await fetch("http://localhost:4000/todo");
       const data = await response.json();
       setTodos(data);
     })();
@@ -30,6 +30,10 @@ function App() {
     setTodos(newArr);
   };
 
+  const todoDeleteHandler = (todo) => {
+    // update the state of the todo
+  };
+
   return (
     <div className="App">
       <div id="title">
@@ -42,7 +46,11 @@ function App() {
         <h1 id="list-title">My to-do list:</h1>
       </div>
       <div>
-        <TodoList todos={todos} onTodoCompleted={todoCompletedHandler} />
+        <TodoList
+          todos={todos}
+          onTodoCompleted={todoCompletedHandler}
+          todoDeleteHandler={todoDeleteHandler}
+        />
       </div>
     </div>
   );
