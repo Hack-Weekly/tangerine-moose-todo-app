@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test-server": "json-server --port 3535 --watch test_db.json",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
