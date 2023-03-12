@@ -4,7 +4,13 @@ require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 
 // Create a mongodb client so that we can communicate with it.
-const client = new MongoClient(process.env.MONGODB_URL);
+const client = new MongoClient(
+  process.env.MONGODB_URL,
+  { useUnifiedTopology: true },
+  { useNewUrlParser: true },
+  { connectTimeoutMS: 30000 },
+  { keepAlive: 1 }
+);
 
 // Create a function to initialize the client.
 const init = async () => {
