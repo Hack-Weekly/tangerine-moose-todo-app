@@ -80,5 +80,21 @@ exports.todo_complete = async (req, res, next) => {
 
 exports.todo_delete = async (req, res, next) => {
   // pass req.params.id to mongodb findOneAndDelete to delete the item
-  console.log(`ID ${req.params.id}`);
+  const oID = new ObjectId(req.params.id);
+  try {
+    let collection = await client.db().collection("todos");
+    let results = await collection.findOneAndDelete(
+      { _id: oID },
+      function (err, doc) {
+        if (err) {
+          throw err;
+        } else {
+          console.log("deleted");
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.send(err).status(500);
+  }
 };
